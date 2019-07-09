@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
 Vue.use(Router);
 // import MiHome from './MiHome.vue'
 const MiHome = () => import(/* webpackChunkName: "home" */ "./views/Home.vue");
@@ -30,17 +29,99 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      redirect: "home"
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+      path: "/home",
+      name: "home",
+      component: MiHome,
+      meta: {
+        index: 1
+      }
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: MiLogin
+    },
+    {
+      path: "/category",
+      name: "category",
+      component: MiCategory,
+      meta: {
+        index: 2
+      }
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: MiCart,
+      meta: {
+        index: 3
+      }
+    },
+    {
+      path: "/user",
+      name: "user",
+      component: MiUser,
+      meta: {
+        index: 4
+      }
+    },
+    {
+      path: "/commodity/list/:id",
+      name: "list",
+      component: MiList
+    },
+    {
+      path: "/commodity/detail/:id",
+      name: "detail",
+      component: MiDetail
+    },
+    {
+      path: "/user/set",
+      name: "set",
+      component: MiSetting,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/address/list",
+      name: "addressList",
+      component: MiAddressList,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/address/edit",
+      name: "addressEdit",
+      component: MiAddressEdit,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/order/checkout",
+      name: "orderCheckout",
+      component: OrderCheckout,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/order/list",
+      name: "orderList",
+      component: OrderList,
+      meta: {
+        // requiresAuth: true
+      }
+    },
+    {
+      path: "/order/view/:id",
+      name: "orderView",
+      component: OrderView
     }
   ]
 });
